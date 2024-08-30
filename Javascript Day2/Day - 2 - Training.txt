@@ -1,0 +1,876 @@
+Example of Primitive Data Types in JavaScript:
+
+Number:
+
+
+let age = 25;
+let temperature = -5.5;
+
+String:
+
+
+let name = "John Doe";
+let message = 'Hello, World!';
+Boolean:
+
+
+let isStudent = true;
+let hasCar = false;
+
+Null:
+
+
+let emptyValue = null;
+
+
+Undefined:
+
+
+let undefinedValue;
+
+BigInt:
+
+
+let bigNumber = 9007199254740991n;
+
+Symbol:
+
+
+let uniqueSymbol = Symbol('description');
+
+NaN (Not a Number):
+
+
+let notANumber = NaN;
+
+
+Example of Object Data Types:
+
+Object Literal:
+
+
+1. Basic Object Literal:
+
+let person = {
+  name: 'John',
+  age: 25,
+  gender: 'male'
+};
+console.log(person);
+
+2. Nested Object Literal:
+
+let student = {
+  name: 'Alice',
+  age: 20,
+  contact: {
+    email: 'alice@example.com',
+    phone: '123-456-7890'
+  }
+};
+console.log(student);
+
+3. Object with Methods:
+
+let calculator = {
+  add: function (a, b) {
+    return a + b;
+  },
+  subtract: function (a, b) {
+    return a - b;
+  }
+};
+console.log(calculator.add(5, 3));
+console.log(calculator.subtract(8, 4));
+
+4. Dynamic Property Names:
+
+let propertyName = 'color';
+let car = {
+  brand: 'Toyota',
+  [propertyName]: 'blue' // Dynamic proeprties always written into the square bracket
+};
+console.log(car);
+
+5. Object with Array Property:
+
+let groceryList = {
+  items: ['apple', 'banana', 'orange'], // Array declaration inside the object
+  totalItems: function () {
+    return this.items.length;
+  }
+};
+console.log(groceryList.totalItems());
+
+6. Object with Getter and Setter:
+
+let temperature = {
+  _celsius: 25,
+  get fahrenheit() {
+    return (this._celsius * 9/5) + 32;
+  },
+  set celsius(value) {
+    this._celsius = value;
+  }
+};
+temperature.celsius = 30;
+console.log(temperature.fahrenheit);
+
+7. Object with Constructor Function:
+
+function Book(title, author) {
+  this.title = title;
+  this.author = author;
+}
+
+let myBook = new Book('The Catcher in the Rye', 'J.D. Salinger');
+console.log(myBook);
+
+
+Example of dialog boxes in JavaScript:
+
+1. Alert Box:
+Used to display a message to the user with an OK button.
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alert Box Example</title>
+    <script>
+        function showAlert() {
+            alert("This is an alert box!");
+        }
+    </script>
+</head>
+<body>
+
+<button onclick="showAlert()">Show Alert</button>
+
+</body>
+</html>
+
+
+2. Confirm Box:
+Used to ask the user for confirmation with OK and Cancel buttons.
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Box Example</title>
+    <script>
+        function showConfirm() {
+            var result = confirm("Do you want to proceed?");
+            if (result) {
+                alert("User clicked OK!");
+            } else {
+                alert("User clicked Cancel!");
+            }
+        }
+    </script>
+</head>
+<body>
+
+<button onclick="showConfirm()">Show Confirm</button>
+
+</body>
+</html>
+
+
+3. Prompt Box:
+Used to prompt the user for input.
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Box Example</title>
+    <script>
+        function showPrompt() {
+            var userInput = prompt("Please enter your name:", "John Doe");
+            if (userInput !== null) {
+                alert("Hello, " + userInput + "!");
+            } else {
+                alert("User clicked Cancel!");
+            }
+        }
+    </script>
+</head>
+<body>
+
+<button onclick="showPrompt()">Show Prompt</button>
+
+</body>
+</html>
+
+
+4. Custom Modal:
+Creating a custom modal dialog using HTML, CSS, and JavaScript.
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Modal Example</title>
+    <style>
+        /* Styles for the modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+        /* Styles for the overlay */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 0;
+        }
+    </style>
+    <script>
+        function showModal() {
+            // Show the modal and overlay
+            document.getElementById("modal").style.display = "block";
+            document.getElementById("overlay").style.display = "block";
+        }
+
+        function hideModal() {
+            // Hide the modal and overlay
+            document.getElementById("modal").style.display = "none";
+            document.getElementById("overlay").style.display = "none";
+        }
+    </script>
+</head>
+<body>
+
+<button onclick="showModal()">Show Custom Modal</button>
+
+<!-- Modal -->
+<div id="modal" class="modal">
+    <p>This is a custom modal dialog.</p>
+    <button onclick="hideModal()">Close</button>
+</div>
+
+<!-- Overlay -->
+<div id="overlay" class="overlay"></div>
+
+</body>
+</html>
+
+
+Examples of Map method :
+
+Example 1: Basic Usage
+
+// Double each element in the array
+const originalArray = [1, 2, 3, 4, 5];
+const doubledArray = originalArray.map((num) => num * 2);
+
+console.log(doubledArray); // Output: [2, 4, 6, 8, 10]
+
+Example 2: Mapping Strings
+
+// Convert each string to uppercase
+const words = ['apple', 'banana', 'cherry'];
+const uppercaseWords = words.map((word) => word.toUpperCase());
+
+console.log(uppercaseWords); // Output: ['APPLE', 'BANANA', 'CHERRY']
+
+Example 3: Using Index Parameter
+
+// Add the index to each element
+const originalArray = [10, 20, 30, 40, 50];
+const arrayWithIndex = originalArray.map((num, index) => num + index);
+
+console.log(arrayWithIndex); // Output: [10, 21, 32, 43, 54]
+
+Example 4: Mapping Objects
+
+// Transform objects in an array
+const people = [
+  { name: 'Alice', age: 25 },
+  { name: 'Bob', age: 30 },
+  { name: 'Charlie', age: 22 }
+];
+
+const agesOnly = people.map((person) => person.age);
+
+console.log(agesOnly); // Output: [25, 30, 22]
+
+Example 5: Complex Transformations
+
+// Calculate the square of the product of two arrays
+const array1 = [1, 2, 3];
+const array2 = [4, 5, 6];
+
+const resultArray = array1.map((num1, index) => (num1 * array2[index]) ** 2);
+
+console.log(resultArray); // Output: [16, 100, 324]
+
+
+
+Examples of filter method:
+
+
+Example 1: Filtering even numbers from an array
+
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+const evenNumbers = numbers.filter(function(number) {
+  return number % 2 === 0;
+});
+
+console.log(evenNumbers); // Output: [2, 4, 6, 8, 10]
+
+Example 2: Filtering strings longer than a certain length
+
+const words = ["apple", "banana", "kiwi", "grape", "orange"];
+
+const longWords = words.filter(function(word) {
+  return word.length > 5;
+});
+
+console.log(longWords); // Output: ["banana", "orange"]
+
+Example 3: Filtering objects based on a property value
+
+const people = [
+  { name: "John", age: 25 },
+  { name: "Jane", age: 30 },
+  { name: "Bob", age: 22 },
+  { name: "Alice", age: 28 }
+];
+
+const adults = people.filter(function(person) {
+  return person.age >= 25;
+});
+
+console.log(adults);
+// Output: [{ name: "John", age: 25 }, { name: "Jane", age: 30 }, { name: "Alice", age: 28 }]
+
+Example 4: Filtering elements containing a specific substring
+
+const fruits = ["apple", "banana", "kiwi", "grape", "orange"];
+
+const filteredFruits = fruits.filter(function(fruit) {
+  return fruit.includes("a");
+});
+
+console.log(filteredFruits); // Output: ["apple", "banana", "grape", "orange"]
+
+
+Example of reduce method:
+
+Example 1: Summing Array Elements
+
+const numbers = [1, 2, 3, 4, 5];
+
+const sum = numbers.reduce((accumulator, currentValue) => {
+  return accumulator + currentValue;
+}, 0);
+
+console.log(sum); // Output: 15
+
+Example 2: Finding the Maximum Value
+
+const numbers = [10, 5, 8, 20, 15];
+
+const max = numbers.reduce((accumulator, currentValue) => {
+  return Math.max(accumulator, currentValue);
+}, Number.MIN_VALUE);
+
+console.log(max); // Output: 20
+
+Example 3: Flattening an Array
+
+const nestedArray = [[1, 2], [3, 4], [5, 6]];
+
+const flattenedArray = nestedArray.reduce((accumulator, currentValue) => {
+  return accumulator.concat(currentValue);
+}, []);
+
+console.log(flattenedArray); // Output: [1, 2, 3, 4, 5, 6]
+
+Example 4: Counting Occurrences of Elements
+
+const fruits = ['apple', 'banana', 'orange', 'apple', 'banana'];
+
+const countOccurrences = fruits.reduce((accumulator, currentValue) => {
+  accumulator[currentValue] = (accumulator[currentValue] || 0) + 1;
+  return accumulator;
+}, {});
+
+console.log(countOccurrences);
+// Output: { apple: 2, banana: 2, orange: 1 }
+
+Example 5: Transforming Data
+
+const numbers = [1, 2, 3, 4];
+
+const doubledArray = numbers.reduce((accumulator, currentValue) => {
+  accumulator.push(currentValue * 2);
+  return accumulator;
+}, []);
+
+console.log(doubledArray); // Output: [2, 4, 6, 8]
+
+Example 5: Combining multiple conditions with the logical AND operator
+
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+const filteredNumbers = numbers.filter(function(number) {
+  return number % 2 === 0 || number > 5;
+});
+
+console.log(filteredNumbers); // Output: [6, 8, 10]
+
+
+Examples of Closure:
+
+
+
+Example 1: Basic Closure
+
+function outerFunction() {
+  let outerVariable = 'I am from the outer function';
+
+  function innerFunction() {
+    console.log(outerVariable);
+  }
+
+  return innerFunction;
+}
+
+const closureExample = outerFunction();
+closureExample(); // Outputs: I am from the outer function
+
+In this example, outerFunction defines a variable (outerVariable) and returns the innerFunction. When closureExample is invoked, it still has access to outerVariable even though outerFunction has completed execution.
+
+Example 2: Closure with Parameters
+
+function outerFunction(x) {
+  return function(y) {
+    console.log(x + y);
+  };
+}
+
+const closureExample = outerFunction(5);
+closureExample(3); // Outputs: 8
+Here, outerFunction takes a parameter x and returns an inner function. The inner function, when invoked (closureExample(3)), still has access to x from its enclosing scope.
+
+Example 3: Counter using Closure
+
+function createCounter() {
+  let count = 0;
+
+  return function() {
+    count++; // 1
+    console.log(count); // 1
+  };
+}
+
+const counter = createCounter();
+counter(); // Outputs: 1
+counter(); // Outputs: 2
+
+This example demonstrates a closure-based counter. The createCounter function returns an inner function, and each time the inner function is called, it increments and logs the count variable from the outer scope.
+
+Example 4: Closure in Asynchronous Code
+
+function asyncOperation() {
+  let result;
+
+  setTimeout(function() {
+    result = 'Async operation completed';
+    console.log(result);
+  }, 2000);
+
+  console.log('Async operation started');
+}
+
+asyncOperation();
+
+
+
+Example of Event Handling and DOM Manipulation:
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Handling and DOM Manipulation</title>
+</head>
+<body>
+
+    <p id="myParagraph">Click the button to change me!</p>
+    <button id="myButton">Click me</button>
+
+    <script>
+        // Get the elements
+        let paragraph = document.getElementById('myParagraph');
+        let button = document.getElementById('myButton');
+
+        // Event handling - change the paragraph text when the button is clicked
+        button.addEventListener('click', function() {
+            paragraph.textContent = 'Text changed!';
+        });
+    </script>
+
+</body>
+</html>
+
+Example of JavaScript Object :
+
+
+// Creating an object using object literal syntax
+let person = {
+  firstName: "John",
+  lastName: "Doe",
+  age: 30,
+  isStudent: false,
+  address: {
+    city: "New York",
+    zipCode: "10001"
+  },
+  sayHello: function() {
+    console.log("Hello, my name is " + this.firstName + " " + this.lastName);
+  }
+};
+
+// Accessing object properties
+console.log(person.firstName); // Output: John
+console.log(person.address.city); // Output: New York
+
+// Calling object method
+person.sayHello(); // Output: Hello, my name is John Doe
+
+
+
+Example of Fetch API in JavaScript:
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch API Example</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Fetch API Example</h1>
+        <button id="fetchButton">Fetch Data</button>
+        <div id="output"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+}
+
+.container {
+    text-align: center;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#output {
+    margin-top: 20px;
+}
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    const fetchButton = document.getElementById('fetchButton');
+    const outputDiv = document.getElementById('output');
+
+    fetchButton.addEventListener('click', fetchData);
+
+    function fetchData() {
+        // Replace the URL with the API you want to fetch data from
+        const apiUrl = 'https://jsonplaceholder.typicode.com/todos/1';
+
+        fetch(apiUrl)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                displayData(data);
+            })
+            .catch(error => {
+                console.error('Fetch error:', error);
+                outputDiv.innerHTML = '<p>Error fetching data</p>';
+            });
+    }
+
+    function displayData(data) {
+        outputDiv.innerHTML = `
+            <h2>Data Fetched Successfully</h2>
+            <pre>${JSON.stringify(data, null, 2)}</pre>
+        `;
+    }
+});
+
+
+Example of localStorage :
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Storage Example</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Local Storage Example</h1>
+    <label for="inputText">Enter Text:</label>
+    <input type="text" id="inputText">
+    <button onclick="saveToLocalStorage()">Save to Local Storage</button>
+    <p id="displayText">Text from Local Storage will appear here.</p>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
+
+
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+input {
+    padding: 8px;
+    width: 200px;
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#displayText {
+    margin-top: 20px;
+}
+
+
+// Check if Local Storage is supported by the browser
+if (typeof(Storage) !== "undefined") {
+    // Code for localStorage/sessionStorage.
+    // Your web app should use sessionStorage for temporary data and localStorage for persistent data.
+
+    // Retrieve data from Local Storage and display it
+    document.getElementById("displayText").innerText = localStorage.getItem("savedText") || "Text from Local Storage will appear here.";
+
+    // Function to save text to Local Storage
+    function saveToLocalStorage() {
+        var inputText = document.getElementById("inputText").value;
+
+        if (inputText.trim() !== "") {
+            localStorage.setItem("savedText", inputText);
+            document.getElementById("displayText").innerText = inputText;
+            document.getElementById("inputText").value = "";
+        } else {
+            alert("Please enter some text!");
+        }
+    }
+} else {
+    // Sorry! No Web Storage support..
+    alert("Your browser does not support Local Storage. Please use a modern browser.");
+}
+
+
+Example of sessionStorage :
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>sessionStorage Example</title>
+</head>
+<body>
+  <div class="container">
+    <h1>Session Storage Example</h1>
+    <label for="inputText">Enter a message:</label>
+    <input type="text" id="inputText" placeholder="Type something...">
+    <button onclick="saveToSessionStorage()">Save to Session Storage</button>
+    <div id="output"></div>
+  </div>
+
+  <script src="script1.js"></script>
+</body>
+</html>
+
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.container {
+  text-align: center;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+input {
+  padding: 8px;
+  margin: 8px 0;
+}
+
+button {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #007BFF;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+
+// Function to save input text to sessionStorage
+function saveToSessionStorage() {
+  // Get the input value
+  var inputValue = document.getElementById('inputText').value;
+
+  // Check if input value is not empty
+  if (inputValue.trim() !== '') {
+    // Save the input value to sessionStorage
+    sessionStorage.setItem('userMessage', inputValue);
+
+    // Display the saved message
+    displaySavedMessage();
+  } else {
+    alert('Please enter a message before saving.');
+  }
+}
+
+// Function to display the saved message from sessionStorage
+function displaySavedMessage() {
+  // Get the output div
+  var outputDiv = document.getElementById('output');
+
+  // Get the saved message from sessionStorage
+  var savedMessage = sessionStorage.getItem('userMessage');
+
+  // Display the saved message in the output div
+  outputDiv.innerHTML = '<p>Saved Message: ' + savedMessage + '</p>';
+}
+
+// Display the saved message on page load (if any)
+displaySavedMessage();
+
+
+
+
+
+
+
+
+
+Example of Promises:
+
+In JavaScript, promises are a way to handle asynchronous operations. They provide a cleaner and more organized way to work with asynchronous code compared to using callbacks directly. A promise represents a value that may be available now, or in the future, or never.   pending , rejected, completed
+
+
+const fetchData = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    const randomValue = Math.random();
+
+    if (randomValue > 0.5) {
+      resolve(`Data: ${randomValue}`);
+    } else {
+      reject("Error: Unable to fetch data");
+    }
+  }, 1000);
+});
+
+fetchData
+  .then((data) => {
+    console.log("Success:", data);
+  })
+  .catch((error) => {
+    console.log("Error:", error);
+  });
+
+

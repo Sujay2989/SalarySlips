@@ -1,0 +1,240 @@
+import React, { useState } from 'react';
+
+
+const ParentComponent = () => {
+  const [messageFromChild, setMessageFromChild] = useState('');
+
+  const handleChildEvent = (message) => {
+    setMessageFromChild(message);
+  };
+
+  return (
+    <div>
+      <h1>Parent Component</h1>
+      <p>Message from Child: {messageFromChild}</p>
+      <ChildComponent onChildEvent={handleChildEvent} />
+    </div>
+  );
+};
+
+export default ParentComponent;
+
+
+
+
+const ChildComponent = ({ onChildEvent }) => {
+  const [message, setMessage] = useState('');
+
+  const handleChange = (e) => {
+    setMessage(e.target.value);
+  };
+
+  const handleClick = () => {
+    // Send the message to the parent component
+    onChildEvent(message); // props as a function
+  };
+
+  return (
+    <div>
+      <h2>Child Component</h2>
+      <input type="text" value={message} onChange={handleChange} />
+      <button onClick={handleClick}>Send Message to Parent</button>
+    </div>
+  );
+};
+
+
+
+================================================
+Conditional Rendering
+
+// Import React and useState hook
+import React, { useState } from 'react';
+
+// Functional component
+function ConditionalRenderingExample() {
+  // State variable to track whether the user is logged in
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // Function to handle login/logout
+  const handleLoginToggle = () => {
+    // Toggle the value of isLoggedIn
+    setIsLoggedIn(!isLoggedIn);
+  };
+
+  // Render different content based on the login status
+  return (
+    <div>
+      <h1>Conditional Rendering Example</h1>
+      {/* Display different messages based on the login status */}
+      {isLoggedIn ? (
+        <p>Welcome, User! You are logged in.</p>
+      ) : (
+        <p>Please log in to access the content.</p>
+      )}
+
+      {/* Render a button to toggle login status */}
+      <button onClick={handleLoginToggle}>
+        {isLoggedIn ? 'Logout' : 'Login'}
+      </button>
+    </div>
+  );
+}
+
+// Export the component
+export default ConditionalRenderingExample;
+====================================================
+
+import React, { Component } from 'react';
+
+class LifecycleExample extends Component {
+  // 1. Mounting Phase
+  constructor(props) {
+    super(props);
+    console.log('1. Constructor - Component is being initialized');
+    this.state = {
+      data: 'Initial data',
+    };
+  }
+
+  static getDerivedStateFromProps(nextProps, nextState) {
+    console.log('2. getDerivedStateFromProps - Called before every render if props/state change');
+    return null;
+  }
+
+  componentDidMount() {
+    console.log('3. componentDidMount - Component is mounted to the DOM');
+  }
+
+  // 2. Updating Phase
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('4. shouldComponentUpdate - Determines whether the component should re-render');
+    return true;
+  }
+getSnapshotBeforeUpdate(prevProps, prevState) {
+    console.log('5. getSnapshotBeforeUpdate - Called before changes from render are committed to the DOM');
+    return null;
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log('6. componentDidUpdate - Called after the component is updated in the DOM');
+  }
+
+  // 3. Unmounting Phase
+  componentWillUnmount() {
+    console.log('7. componentWillUnmount - Called before the component is removed');
+  }
+
+  // Other lifecycle methods:
+  // componentDidCatch(error, info) - Error boundary
+  // static getDerivedStateFromError(error) - Error boundary
+
+  // Handling events
+  handleClick = () => {
+    this.setState({ data: 'Updated data' });
+  };
+
+  render() {
+    console.log('Render - Component is rendered');
+    return (
+      <div>
+        <p>Data: {this.state.data}</p>
+        <button onClick={this.handleClick}>Update Data</button>
+      </div>
+    );
+  }
+}
+
+export default LifecycleExample;
+
+===================================================
+
+import React, { useState } from 'react';
+
+// Higher Order Component
+const withCounter = (WrappedComponent) => {
+  // Define a new functional component
+  const WithCounter = (props) => {
+    const [count, setCount] = useState(0);
+
+    // Define additional functionality
+    const incrementCount = () => {
+      setCount(count + 1);
+    };
+
+    // Return the wrapped component with additional props
+    return <WrappedComponent count={count} incrementCount={incrementCount} {...props} />;
+  };
+
+  return WithCounter;
+};
+
+// Create a simple component
+const ClickCounter = ({ count, incrementCount }) => {
+  return (
+    <div>
+      <button onClick={incrementCount}>Click me</button>
+      <p>Clicked {count} times</p>
+    </div>
+  );
+};
+// Use the HOC to enhance the ClickCounter component
+const EnhancedClickCounter = withCounter(ClickCounter);
+
+// App component
+const App = () => {
+  return (
+    <div>
+      <h1>Higher Order Component Example</h1>
+      <EnhancedClickCounter />
+    </div>
+  );
+};
+
+export default App;
+
+Amol 16:38
+// Counter.js
+
+import React, { useState, useCallback} from 'react';
+
+const Counter = React.memo(({ count, increment }) => {
+  console.log('Rendering Counter Component');
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={increment}>Increment</button>
+    </div>
+  );
+});
+
+
+
+
+//In this example, the Counter component takes two props: count and increment. When the "Increment" button is clicked, the increment function will be called to update the count.
+
+
+// App.js
+
+
+
+const App = () => {
+  const [count, setCount] = useState(0);
+
+  const increment = useCallback(() => {
+    setCount((prevCount) => prevCount + 1);
+  }, []);
+
+  return (
+    <div>
+      <h1>React Memoization Example</h1>
+      <Counter count={count} increment={increment} />
+    </div>
+  );
+};
+
+export default App;
+
+
+//In this App component, we use the useState hook to manage the count state. The increment function is defined using

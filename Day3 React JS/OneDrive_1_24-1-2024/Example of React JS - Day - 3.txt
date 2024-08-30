@@ -1,0 +1,561 @@
+State Example in React using Class Component:
+
+Counter Component:
+This example demonstrates a basic counter that increments on button click.
+
+
+
+import React, { Component } from 'react';
+
+class Counter extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0,
+    };
+  }
+
+  handleIncrement = () => {
+    this.setState({ count: this.state.count + 1 });
+  };
+
+  render() {
+    return (
+      <div>
+        <h1>Counter: {this.state.count}</h1>
+        <button onClick={this.handleIncrement}>Increment</button>
+      </div>
+    );
+  }
+}
+
+export default Counter;
+
+
+
+
+Form Input Component:
+
+This example shows how to handle a controlled form input using state.
+
+
+
+import React, { Component } from 'react';
+
+class FormInput extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      inputValue: '',
+    };
+  }
+
+  handleChange = (event) => {
+    this.setState({ inputValue: event.target.value });
+  };
+
+  render() {
+    return (
+      <div>
+        <label>
+          Type something:
+          <input
+            type="text"
+            value={this.state.inputValue}
+            onChange={this.handleChange}
+          />
+        </label>
+        <p>You typed: {this.state.inputValue}</p>
+      </div>
+    );
+  }
+}
+
+export default FormInput;
+
+
+
+
+Toggle Button Component:
+
+This example demonstrates a simple toggle button using state.
+
+
+
+import React, { Component } from 'react';
+
+class ToggleButton extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isToggled: false,
+    };
+  }
+
+  handleToggle = () => {
+    this.setState((prevState) => ({
+      isToggled: !prevState.isToggled,
+    }));
+  };
+
+  render() {
+    return (
+      <div>
+        <p>{this.state.isToggled ? 'Toggled On' : 'Toggled Off'}</p>
+        <button onClick={this.handleToggle}>Toggle</button>
+      </div>
+    );
+  }
+}
+
+export default ToggleButton;
+
+
+State Example in React using functional Component:
+
+
+
+Example 1: Basic State
+In this example, we'll create a simple functional component with a state variable and a button to update that state.
+
+
+
+import React, { useState } from 'react';
+
+const Counter = () => {
+  const [count, setCount] = useState(0);
+
+  const increment = () => {
+    setCount(count + 1);
+  };
+
+  const decrement = () => {
+    setCount(count - 1);
+  };
+
+  return (
+    <div>
+      <h2>Counter: {count}</h2>
+      <button onClick={increment}>Increment</button>
+      <button onClick={decrement}>Decrement</button>
+    </div>
+  );
+};
+
+export default Counter;
+
+
+
+
+Example 2: Handling Input
+
+Here, we'll create a functional component with an input field and demonstrate how to handle input and update the state accordingly.
+
+
+import React, { useState } from 'react';
+
+const InputComponent = () => {
+  const [inputValue, setInputValue] = useState('');
+
+  const handleChange = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  return (
+    <div>
+      <input type="text" value={inputValue} onChange={handleChange} />
+      <p>Input Value: {inputValue}</p>
+    </div>
+  );
+};
+
+export default InputComponent;
+
+
+
+Example 3: Complex State
+
+In this example, we'll use an object as the state to manage multiple values.
+
+
+import React, { useState } from 'react';
+
+const ComplexState = () => {
+  const [userInfo, setUserInfo] = useState({
+    username: '',
+    email: '',
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUserInfo((prevUserInfo) => ({
+      ...prevUserInfo,
+      [name]: value,
+    }));
+  };
+
+  return (
+    <div>
+      <label>
+        Username:
+        <input
+          type="text"
+          name="username"
+          value={userInfo.username}
+          onChange={handleChange}
+        />
+      </label>
+      <br />
+      <label>
+        Email:
+        <input
+          type="text"
+          name="email"
+          value={userInfo.email}
+          onChange={handleChange}
+        />
+      </label>
+      <p>Username: {userInfo.username}</p>
+      <p>Email: {userInfo.email}</p>
+    </div>
+  );
+};
+
+export default ComplexState;
+
+
+
+
+
+
+
+
+import React, { useState } from 'react';
+
+const ParentComponent = () => {
+  const [parentState, setParentState] = useState('Initial State');
+
+  const handleChildClick = () => {
+    setParentState('Updated State');
+  };
+
+  return (
+    <div>
+      <h2>Parent State: {parentState}</h2>
+      <ChildComponent onClick={handleChildClick} />
+    </div>
+  );
+};
+
+const ChildComponent = ({ onClick }) => {
+  return (
+    <div>
+      <h3>Child Component</h3>
+      <button onClick={onClick}>Update Parent State</button>
+    </div>
+  );
+};
+
+export default ParentComponent;
+
+
+
+
+
+
+
+
+
+Example 3: Managing Complex State
+
+
+
+import React, { useState } from 'react';
+
+const ComplexStateExample = () => {
+  const [person, setPerson] = useState({
+    name: 'John Doe',
+    age: 25,
+    address: {
+      street: '123 Main St',
+      city: 'Anytown',
+      state: 'CA',
+    },
+  });
+
+  const updateAddress = () => {
+    setPerson({
+      ...person,
+      address: {
+        ...person.address,
+        city: 'New City',
+      },
+    });
+  };
+
+  return (
+    <div>
+      <h2>Person Information</h2>
+      <p>Name: {person.name}</p>
+      <p>Age: {person.age}</p>
+      <p>Address: {person.address.street}, {person.address.city}, {person.address.state}</p>
+      <button onClick={updateAddress}>Update City</button>
+    </div>
+  );
+};
+
+export default ComplexStateExample;
+
+
+
+
+Props Example in React using Class Component:
+
+
+
+Example 1: Passing Data through Props
+
+
+// ParentComponent.js
+import React, { Component } from 'react';
+import ChildComponent from './ChildComponent';
+
+class ParentComponent extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      parentData: 'Data from Parent',
+    };
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Parent Component</h1>
+        <ChildComponent dataFromParent={this.state.parentData} /> // props value defined into parent compoennt
+      </div>
+    );
+  }
+}
+
+// ChildComponent.js
+import React from 'react';
+
+class ChildComponent extends React.Component {
+  render() {
+    return (
+      <div>
+        <h2>Child Component</h2>
+        <p>Data received from Parent: {this.props.dataFromParent}</p>
+      </div>
+    );
+  }
+}
+
+export default ParentComponent;
+
+
+
+Example 2: Passing Functions through Props
+
+
+// ParentComponent.js
+import React, { Component } from 'react';
+import ChildComponent from './ChildComponent';
+
+class ParentComponent extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0,
+    };
+  }
+
+  incrementCount = () => {
+    this.setState((prevState) => ({
+      count: prevState.count + 1,
+    }));
+  };
+
+  render() {
+    return (
+      <div>
+        <h1>Parent Component</h1>
+        <ChildComponent
+          count={this.state.count}
+          incrementFunction={this.incrementCount}
+        />
+      </div>
+    );
+  }
+}
+
+// ChildComponent.js
+import React from 'react';
+
+class ChildComponent extends React.Component {
+  render() {
+    return (
+      <div>
+        <h2>Child Component</h2>
+        <p>Count received from Parent: {this.props.count}</p>
+        <button onClick={this.props.incrementFunction}>Increment Count</button>
+      </div>
+    );
+  }
+}
+
+export default ParentComponent;
+
+
+Example 3: Handling Events in Child Component
+
+
+// ParentComponent.js
+import React, { Component } from 'react';
+import ChildComponent from './ChildComponent';
+
+class ParentComponent extends Component {
+  handleParentEvent = () => {
+    alert('Event handled in Parent Component!');
+  };
+
+  render() {
+    return (
+      <div>
+        <h1>Parent Component</h1>
+        <ChildComponent parentEventHandler={this.handleParentEvent} />
+      </div>
+    );
+  }
+}
+
+// ChildComponent.js
+import React from 'react';
+
+class ChildComponent extends React.Component {
+  handleChildEvent = () => {
+    this.props.parentEventHandler();
+  };
+
+  render() {
+    return (
+      <div>
+        <h2>Child Component</h2>
+        <button onClick={this.handleChildEvent}>Trigger Parent Event</button>
+      </div>
+    );
+  }
+}
+
+export default ParentComponent;
+
+
+Props Example using functional component:
+
+
+Example 1: Basic Props
+
+
+import React from 'react';
+
+const BasicPropsComponent = (props) => {
+  return (
+    <div>
+      <h2>{props.title}</h2>
+      <p>{props.description}</p>
+    </div>
+  );
+};
+
+// Usage
+const App = () => {
+  return (
+    <BasicPropsComponent
+      title="Basic Props Example"
+      description="This is a simple example demonstrating the use of props."
+    />
+  );
+};
+
+
+
+Example 2: Conditional Rendering with Props
+
+
+import React from 'react';
+
+const ConditionalRenderingComponent = (props) => {
+  return (
+    <div>
+      <h2>{props.isLoggedIn ? 'Welcome User!' : 'Please log in.'}</h2>
+    </div>
+  );
+};
+
+// Usage
+const App = () => {
+  return <ConditionalRenderingComponent isLoggedIn={true} />;
+};
+
+
+
+
+Example 3: Passing Functions as Props
+
+
+import React from 'react';
+
+const FunctionAsPropsComponent = (props) => {
+  const handleClick = () => {
+    props.onClick();
+  };
+
+  return (
+    <div>
+      <button onClick={handleClick}>Click me</button>
+    </div>
+  );
+};
+
+// Usage
+const App = () => {
+  const handleClick = () => {
+    alert('Button clicked!');
+  };
+
+  return <FunctionAsPropsComponent onClick={handleClick} />;
+};
+
+
+
+
+Example 4: Handling Complex Data with Props
+
+
+
+
+import React from 'react';
+
+const ComplexDataPropsComponent = (props) => {
+  return (
+    <div>
+      <h2>{props.user.name}</h2>
+      <p>Email: {props.user.email}</p>
+      <p>Age: {props.user.age}</p>
+    </div>
+  );
+};
+
+// Usage
+const App = () => {
+  const user = {
+    name: 'John Doe',
+    email: 'john@example.com',
+    age: 25,
+  };
+
+  return <ComplexDataPropsComponent user={user} />;
+};
+
+

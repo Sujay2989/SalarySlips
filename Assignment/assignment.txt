@@ -1,0 +1,1024 @@
+ASSIGNMENT   SUJAY VEMULA 609729
+================================================================
+
+React JS
+
+Task1:
+
+import React from "react";
+const Greeting = () => {
+    return (
+        <div>
+            <h1>Hello Good Morning</h1>
+        </div>
+    )
+}
+export default Greeting;
+
+=====
+Task2:
+
+//Person.js
+import React from "react";
+const Person = ({name}) => {
+    return (
+        <div>
+            <h1>Hello {name}, Good Morning</h1>
+        </div>
+    )
+}
+ export default Person;
+
+//Greeting.js
+
+import React from "react";
+import Person from "./Task2ReactJSPerson";
+
+const Greeting1 = () => {
+    const name= 'Sujay';
+
+    return (
+        <div>
+            <h1>Hello Good morning </h1>
+        <Person name = {name} />;
+
+        </div>
+        
+    )
+
+}
+export default Greeting1;
+
+============
+Task3 :
+
+Counter.js
+
+import React,{useState} from "react";
+const Counter = () => {
+    const [count, setCount] = useState(0);
+  
+    const incrementCount = () => {
+      setCount(count + 1);
+    };
+  
+    return (
+      <div>
+        <p>Count: {count}</p>
+        <button onClick={incrementCount}>Increment</button>
+      </div>
+    );
+  };
+  
+  export default Counter;
+
+//Greeting.js
+
+import React from "react";
+import Person from "./Task2ReactJSPerson";
+import Counter from "./Counter";
+
+const Greeting1 = () => {
+    const name= 'Sujay';
+
+    return (
+        <div>
+            <h1>Hello Good morning </h1>
+        <Person name = {name} />;
+        <Counter />
+
+        </div>
+        
+    )
+
+}
+export default Greeting1;
+
+====================================
+
+FORM HANDLING WITH FUNCTIONAL COMPONENT:
+
+Task1,2:
+
+import React, { useState } from 'react';
+
+const FormComponent = () => {
+  // State variables for form fields
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+  });
+
+  // Handle form input changes
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  // Handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Add your form submission logic here
+    console.log('Form submitted:', formData);
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      {/* First Name */}
+      <label htmlFor="firstName">First Name:</label>
+      <input
+        type="text"
+        id="firstName"
+        name="firstName"
+        value={formData.firstName}
+        onChange={handleInputChange}
+        required
+      />
+      <br />
+
+      {/* Last Name */}
+      <label htmlFor="lastName">Last Name:</label>
+      <input
+        type="text"
+        id="lastName"
+        name="lastName"
+        value={formData.lastName}
+        onChange={handleInputChange}
+        required
+      />
+      <br />
+
+      {/* Email */}
+      <label htmlFor="email">Email:</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        value={formData.email}
+        onChange={handleInputChange}
+        required
+      />
+      <br />
+
+      {/* Password */}
+      <label htmlFor="password">Password:</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        value={formData.password}
+        onChange={handleInputChange}
+        required
+      />
+      <br />
+
+      {/* Confirm Password */}
+      <label htmlFor="confirmPassword">Confirm Password:</label>
+      <input
+        type="password"
+        id="confirmPassword"
+        name="confirmPassword"
+        value={formData.confirmPassword}
+        onChange={handleInputChange}
+        required
+      />
+      <br />
+
+      {/* Submit Button */}
+      <button type="submit">Submit</button>
+    </form>
+  );
+};
+
+export default FormComponent;
+
+Task3,4:
+
+import React, { useState } from 'react';
+
+const App = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Form submitted with data:', formData);
+    // You can perform additional actions here, such as sending the data to a server.
+  };
+
+  return (
+    <div>
+      <h1>React Form Example</h1>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Name:
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+          />
+        </label>
+        <br />
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  );
+};
+
+export default App;
+=========================================
+
+MATERIAL UI:
+
+Task1:
+
+Create a Header functional component that displays the title of your app.
+ You can use the Typography component from Material-UI for the title.
+
+import React from 'react'
+import { Typography } from '@mui/material';
+import TextField from '@mui/material/TextField';
+
+
+const Header = () => {
+  return (
+    <div>
+      <Typography variant="h3" component="h2">
+  App Heading
+</Typography>
+
+    </div>
+  )
+}
+
+export default Header
+
+==========
+2. 
+Create a UserForm functional component that contains input fields for the user's name and email, 
+and a submit button. 
+Use Material-UI's TextField and Button components.
+
+import React, { useState } from 'react'
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+
+const UserForm = (props) => {
+    const [name,setName] = useState("");
+    const [email,setEmail] = useState("");
+
+    const handleNameChange = (e) => {
+        setName(e.target.value)
+    }
+    const handleEmailChange = (e) => {
+        setEmail(e.target.value)
+    }
+
+    const handleClick = () => {
+        const submittedList = [...props.submittedList , name, email]
+        props.setSubmittedList(submittedList)
+    }
+  return (
+    <div>
+       <TextField
+          required
+          id="outlined-required"
+          label="Name"
+          value={name}
+          onChange={handleNameChange}
+        />
+        <br />
+        <TextField
+          required
+          id="outlined-required"
+          label="Email"
+          value={email}
+          onChange={handleEmailChange}
+        />
+        <Button variant="contained" onClick={handleClick}>Submit</Button>
+    </div>
+  )
+}
+
+export default UserForm
+
+
+==================
+
+3.
+Create a UserList functional component that displays the list of submitted user data. 
+You can use a simple list structure with Material-UI's List, ListItem, and ListItemText components.
+
+import React from 'react'
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+
+
+const UserList = (props) => {
+
+  return (
+    <div>
+    <List >
+            {
+                props.submittedList.map((value) =>
+                (
+                    <ListItem>
+                    <ListItemText
+                        primary={value}
+                    />
+                    </ListItem>
+                ))
+            }
+    </List>
+    </div>
+  )
+}
+
+export default UserList
+
+
+// App.js
+import React, { useState } from 'react'
+import Header from './Assignment/MatUITask1'
+import UserForm from './Assignment/MatUITask2'
+import UserList from './Assignment/MatUITask3'
+
+const App = () => {
+    const [submittedList,setSubmittedList] = useState([]);
+  return (
+    <div>
+      <Header />
+      <UserForm submittedList={submittedList} setSubmittedList={setSubmittedList} />
+      <UserList submittedList={submittedList}  />
+    </div>
+  )
+}
+
+export default App
+
+
+================================================
+HOOKS 
+
+Task1
+
+import React, { useState, useEffect } from 'react';
+
+function MyComponent() {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    document.title = `Count: ${count}`;
+  }, [count]);
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </div>
+  );
+}
+
+export default MyComponent;
+
+=======
+
+Task2
+
+import React, { useMemo } from 'react';
+
+const ExpensiveCalculation = ({ value }) => {
+  const expensiveResult = useMemo(() => {
+    let result = 1;
+    for (let i = 1; i <= value; i++) {
+      result *= i;
+    }
+    return result;
+  }, [value]);
+
+  return (
+    <div>
+      <p>Input value: {value}</p>
+      <p>Expensive calculation result: {expensiveResult}</p>
+    </div>
+  );
+};
+
+export default ExpensiveCalculation;
+===================
+Task3
+
+import React, { useReducer } from 'react';
+
+const initialState = [];
+
+const cartReducer = (state, action) => {
+  switch (action.type) {
+    case 'ADD_ITEM':
+      return [...state, action.payload];
+    case 'REMOVE_ITEM':
+      return state.filter((item) => item.id !== action.payload.id);
+    default:
+      return state;
+  }
+};
+
+const ShoppingCart = () => {
+  const [cart, dispatch] = useReducer(cartReducer, initialState);
+
+  const addItem = (item) => {
+    dispatch({ type: 'ADD_ITEM', payload: item });
+  };
+
+  const removeItem = (item) => {
+    dispatch({ type: 'REMOVE_ITEM', payload: item });
+  };
+
+  return (
+    <div>
+      <h1>Shopping Cart</h1>
+      <ul>
+        {cart.map((item) => (
+          <li key={item.id}>
+            {item.name}
+            <button onClick={() => addItem({ id: item.id, name: item.name })}>
+              Add
+            </button>
+            <button onClick={() => removeItem({ id: item.id, name: item.name })}>
+              Remove
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default ShoppingCart;
+==============
+
+Task4
+import React, { useCallback } from 'react';
+
+const ChildComponent = ({ callback }) => {
+  const wrappedCallback = useCallback(() => {
+    console.log('Wrapped callback called');
+    callback();
+  }, [callback]);
+
+  return (
+    <button onClick={wrappedCallback}>Click me</button>
+  );
+};
+
+const ButtonContainer = () => {
+  const handleClick = () => {
+    console.log('Button clicked');
+  };
+
+  return (
+    <div>
+      <ChildComponent callback={handleClick} />
+    </div>
+  );
+};
+
+export default ButtonContainer;
+
+
+===============================================
+
+REACT ROUTING USING FUNCTIONAL COMPONENT:
+
+Task1:
+
+// Home.js
+import React from 'react';
+
+const Home = () => {
+  return (
+    <div>
+      <h1>Home</h1>
+      <p>Welcome to the home page.</p>
+    </div>
+  );
+};
+
+export default Home;
+
+// About.js
+import React from 'react';
+
+const About = () => {
+  return (
+    <div>
+      <h1>About</h1>
+      <p>Learn more about us.</p>
+    </div>
+  );
+};
+
+export default About;
+
+// Navigation.js
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+const Navigation = () => {
+  return (
+    <nav>
+      <ul>
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+        <li>
+          <Link to="/about">About</Link>
+        </li>
+      </ul>
+    </nav>
+  );
+};
+
+export default Navigation;
+
+// App.js
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Home from './Home';
+import About from './About';
+import Navigation from './Navigation';
+
+const App = () => {
+  return (
+    <Router>
+      <Navigation />
+      <Routes>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route path="/about">
+          <About />
+        </Route>
+      </Routes>
+    </Router>
+  );
+};
+
+export default App;
+
+========
+Task2
+
+// Dashboard.js
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
+import DashboardHome from './DashboardHome';
+import DashboardProfile from './DashboardProfile';
+
+const Dashboard = () => {
+  return (
+    <div>
+      <h1>Dashboard</h1>
+      <Routes>
+        <Route path="/dashboard/home" component={DashboardHome} />
+        <Route path="/dashboard/profile" component={DashboardProfile} />
+      </Routes>
+    </div>
+  );
+};
+
+export default Dashboard;
+
+// DashboardHome.js
+import React from 'react';
+
+const DashboardHome = () => {
+  return (
+    <div>
+      <h2>Dashboard Home</h2>
+      <p>Welcome to the Dashboard Home page.</p>
+    </div>
+  );
+};
+
+export default DashboardHome;
+
+// DashboardProfile.js
+import React from 'react';
+
+const DashboardProfile = () => {
+  return (
+    <div>
+      <h2>Dashboard Profile</h2>
+      <p>Welcome to the Dashboard Profile page.</p>
+    </div>
+  );
+};
+
+export default DashboardProfile;
+
+// App.js
+import React from 'react';
+import { BrowserRouter as Router, Route, Link,Routes } from 'react-router-dom';
+import Home from './Home';
+import About from './About';
+import Navigation from './Navigation';
+import Dashboard from './Dashboard';
+
+const App = () => {
+  return (
+    <Router>
+      <Navigation />
+      <Routes>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route path="/about">
+          <About />
+        </Route>
+        <Route path="/dashboard">
+          <Dashboard />
+        </Route>
+      </Routes>
+    </Router>
+  );
+};
+
+export default App;
+
+// Navigation.js
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+const Navigation = () => {
+  return (
+    <nav>
+      <ul>
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+        <li>
+          <Link to="/about">About</Link>
+        </li>
+        <li>
+          <Link to="/dashboard">Dashboard</Link>
+        </li>
+      </ul>
+    </nav>
+  );
+};
+
+export default Navigation;
+
+===============
+
+Task3:
+
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
+const Home = () => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate('/about');
+  };
+
+  return (
+    <div>
+      <h1>Home</h1>
+      <p>Welcome to the home page.</p>
+      <button onClick={handleClick}>Go to About</button>
+    </div>
+  );
+};
+
+export default Home;
+
+===================================================
+
+ASSIGNMENT ON REDUX
+
+Step2:
+
+// actions.js
+
+// Action Types
+export const ADD_TODO = 'ADD_TODO';
+export const UPDATE_TODO = 'UPDATE_TODO';
+export const DELETE_TODO = 'DELETE_TODO';
+
+// Action Creators
+export const addTodo = (text) => ({
+  type: ADD_TODO,
+  payload: {
+    text,
+  },
+});
+
+export const updateTodo = (id) => ({
+  type: UPDATE_TODO,
+  payload: {
+    id,
+  },
+});
+
+export const deleteTodo = (id) => ({
+  type: DELETE_TODO,
+  payload: {
+    id,
+  },
+});
+
+// reducers.js
+
+import { ADD_TODO, UPDATE_TODO, DELETE_TODO } from './actions';
+
+const initialState = {
+  todos: [],
+};
+
+const todoReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case ADD_TODO:
+      return {
+        ...state,
+        todos: [
+          ...state.todos,
+          {
+            id: Date.now(),
+            text: action.payload.text,
+            completed: false,
+          },
+        ],
+      };
+
+    case UPDATE_TODO:
+      return {
+        ...state,
+        todos: state.todos.map((todo) =>
+          todo.id === action.payload.id ? { ...todo, completed: !todo.completed } : todo
+        ),
+      };
+
+    case DELETE_TODO:
+      return {
+        ...state,
+        todos: state.todos.filter((todo) => todo.id !== action.payload.id),
+      };
+
+    default:
+      return state;
+  }
+};
+
+export default todoReducer;
+
+// store.js
+
+import {legacy_createStore } from 'redux';
+import todoReducer from './reducers';
+
+const store = legacy_createStore(todoReducer);
+
+export default store;
+
+========
+
+Step3:
+
+// TodoForm.js
+
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addTodo } from './actions';
+
+const TodoForm = () => {
+  const [newTodo, setNewTodo] = useState('');
+  const dispatch = useDispatch();
+
+  const handleInputChange = (e) => {
+    setNewTodo(e.target.value);
+  };
+
+  const handleAddTodo = () => {
+    dispatch(addTodo(newTodo));
+    setNewTodo('');
+  };
+
+  return (
+    <div>
+      <input type="text" value={newTodo} onChange={handleInputChange} />
+      <button onClick={handleAddTodo}>Add Todo</button>
+    </div>
+  );
+};
+
+export default TodoForm;
+
+
+// TodoList.js
+
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { updateTodo, deleteTodo } from './actions';
+
+const TodoList = () => {
+  const todos = useSelector((state) => state.todos) || []; // Add a default value if todos is undefined
+  const dispatch = useDispatch();
+
+  const handleUpdateTodo = (id) => {
+    dispatch(updateTodo(id));
+  };
+
+  const handleDeleteTodo = (id) => {
+    dispatch(deleteTodo(id));
+  };
+
+  return (
+    <ul>
+      {todos.map((todo) => (
+        <li key={todo.id}>
+          {todo.text} - Completed: {todo.completed ? 'Yes' : 'No'}
+          <button onClick={() => handleUpdateTodo(todo.id)}>
+            {todo.completed ? 'Undo' : 'Complete'}
+          </button>
+          <button onClick={() => handleDeleteTodo(todo.id)}>Delete</button>
+        </li>
+      ))}
+    </ul>
+  );
+};
+
+export default TodoList;
+
+=======================
+
+Step4:
+
+// index.js
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import store from './store';
+import App from './App';
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+);
+
+// App.js
+
+import React from 'react';
+import TodoForm from './redux/ToDoForm';
+import TodoList from './redux/ToDoList';
+
+const App = () => {
+  return (
+    <div>
+      <h1>Todo App</h1>
+      <TodoForm />
+      <TodoList />
+    </div>
+  );
+};
+
+export default App;
+=========================================================
+
+CONTEXT API WITH FUNCTIONAL COMPONENT:
+
+Step1,2:
+
+// contexts/UserProvider.js
+import React, { useState, createContext } from 'react';
+ 
+export const UserContext = createContext();
+ 
+export const UserProvider = ({ children }) => {
+  const [userData, setUserData] = useState({
+    username: 'JohnDoe',
+    age: 25,
+  });
+ 
+  const updateUser = (newData) => {
+    setUserData((prevData) => ({ ...prevData, ...newData }));
+  };
+ 
+  return (
+    <UserContext.Provider value={{ userData, updateUser }}>
+      {children}
+    </UserContext.Provider>
+  );
+};
+
+Step3:
+
+import React, { useContext } from 'react';
+import { UserContext } from '../components/UserProvider';
+ 
+const UserProfile = () => {
+  const { userData } = useContext(UserContext);
+ 
+  return (
+    <div>
+      <h2>User Profile</h2>
+      <p>Username: {userData.username}</p>
+      <p>Age: {userData.age}</p>
+    </div>
+  );
+};
+ 
+export default UserProfile;
+
+
+// components/UpdateProfile.js
+import React, { useState, useContext } from 'react';
+import { UserContext } from '../components/UserProvider';
+ 
+const UpdateProfile = () => {
+  const { updateUser } = useContext(UserContext);
+  const [newData, setNewData] = useState({});
+ 
+  const handleInputChange = (e) => {
+    setNewData({ [e.target.name]: e.target.value });
+  };
+ 
+  const handleUpdate = () => {
+    updateUser(newData);
+    setNewData({});
+  };
+ 
+  return (
+    <div>
+      <h2>Update Profile</h2>
+      <label>
+        Username:
+        <input type="text" name="username" onChange={handleInputChange} />
+      </label>
+      <label>
+        Age:
+        <input type="number" name="age" onChange={handleInputChange} />
+      </label>
+      <button onClick={handleUpdate}>Update</button>
+    </div>
+  );
+};
+ 
+export default UpdateProfile;
+
+
+Step4:
+
+// App.js
+import React from 'react';
+import { UserProvider } from './components/UserProvider';
+import UserProfile from './components/UserProfile';
+import UpdateProfile from './components/UpdateProfile';
+ 
+const App = () => {
+  return (
+    <UserProvider>
+      <div>
+        <h1>React Context App</h1>
+        <UserProfile />
+        <UpdateProfile />
+      </div>
+    </UserProvider>
+  );
+};
+ 
+export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

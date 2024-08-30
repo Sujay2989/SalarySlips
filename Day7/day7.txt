@@ -1,0 +1,203 @@
+const express=require('express')
+const mongoose= require ('mongoose')
+
+const app = express();
+const port = 4000;
+
+// connect ro MongoDB
+
+mongoose.connect('mongodb://localhost/college', {
+    useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+
+const db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
+db.once('open', () => {
+    console.log('Connected to MongoDB');
+})
+
+// Define routes and start the server
+app.get('/', (req, res) => {
+    res.send('Hello, MongoDB!');
+  });
+  
+  app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
+  });
+
+============================
+Connecting to MySQL in Express.js:
+
+npm install mysql
+
+const express = require('express');
+const mysql = require('mysql');
+
+const app = express();
+const PORT = 3000;
+
+// Create a MySQL connection
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'your_username',
+  password: 'your_password',
+  database: 'your_database_name',
+});
+
+// Connect to MySQL
+connection.connect((err) => {
+  if (err) {
+    console.error('Error connecting to MySQL:', err.stack);
+    return;
+  }
+  console.log('Connected to MySQL as id', connection.threadId);
+});
+
+// Define routes and start the server
+app.get('/', (req, res) => {
+  res.send('Hello, MySQL!');
+});
+
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
+
+==================================
+
+const express = require('express');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+
+const app = express();
+const PORT = process.env.PORT || 4000;
+
+// MongoDB connection
+mongoose.connect('mongodb://127.0.0.1/task', { useNewUrlParser: true, 
+useUnifiedTopology: true });
+const db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once('open', () => {
+  console.log('Connected to MongoDB');
+});
+
+// Middleware
+app.use(bodyParser.json());
+
+// Routes
+app.use('/api', require('./routes/task'));
+
+// Start the server
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
+
+
+=============================================
+
+const mongoose = require('mongoose');
+
+const taskSchema = new mongoose.Schema({
+  description: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  completed: {
+    type: Boolean,
+    default: false,
+  },
+});
+
+const Task = mongoose.model('Task', taskSchema);
+
+module.exports = Task;
+
+====================================
+
+const express = require('express');
+const router = express.Router();
+const Task = require('../models/task');
+
+// Create a task
+router.post('/tasks', async (req, res) => {
+    try {
+      const task = new Task(req.body);
+      await task.save();
+      res.status(201).send(task);
+    } catch (error) {
+      res.status(400).send(error);
+    }
+    console.log("Data Inserted Successfully")
+  });
+// Read all tasks
+router.get('/tasks', async (req, res) => {
+    try {
+      const tasks = await Task.find();
+      res.send(tasks);
+    } catch (error) {
+      res.status(500).send(error);
+    }
+    console.log("Fetched Data Successfully")
+  });
+
+
+  // Update a task by ID
+router.patch('/tasks/:id', async (req, res) => {
+    try {
+      const task = await Task.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
+      if (!task) {
+        return res.status(404).send();
+      }
+      res.send(task);
+    } catch (error) {
+      res.status(400).send(error);
+    }
+    console.log("Data Updated!")
+  });
+
+// Delete a task by ID
+  router.delete('/tasks/:id', async (req, res) => {
+    try {
+      const task = await Task.findByIdAndDelete(req.params.id);
+      if (!task) {
+        return res.status(404).send();
+      }
+      res.send(task);
+    } catch (error) {
+      res.status(500).send(error);
+    }
+    console.log("Data Deleted!")
+  });
+  
+
+
+  module.exports = router;
+
+
+const chai = import('chai');
+const chaiHttp = import('chai-http');
+const app = require('../app'); // Update the path according to your file structure
+
+chai.use(chaiHttp);
+const expect = chai.expect;
+
+describe('GET /', () => {
+  it('should return a welcome message', (done) => {
+    chai
+      .request(app)
+      .get('/')
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body).to.be.an('object');
+        expect(res.body.message).to.equal('Hello, World!');
+        done();
+      });
+  });
+});
+
+
+

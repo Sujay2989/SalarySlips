@@ -1,0 +1,617 @@
+1.
+
+package com;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class P1 {
+
+	public static void main(String[] args) {
+		
+		
+		WebDriver driver = new ChromeDriver();
+		driver.get("https://demowebshop.tricentis.com/");
+		System.out.println(driver.getTitle());
+		driver.quit();
+		
+	
+		
+
+	}
+
+}
+
+==============================
+2.
+
+package com;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class P2 {
+
+	public static void main(String[] args) {
+		WebDriver driver = new ChromeDriver();
+		driver.get("https://www.google.co.in");
+		String s= driver.getTitle();
+		System.out.println(s);
+		driver.quit();
+
+	}
+
+}
+
+=========================================
+3.
+
+package com;
+import org.openqa.selenium.By;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class P3_ClickLink {
+
+	public static void main(String[] args) throws InterruptedException 
+	{
+		WebDriver driver = new ChromeDriver();
+		driver.get("http://demowebshop.tricentis.com");
+		WebElement register = driver.findElement(By.linkText("Register"));
+		register.click();
+		Thread.sleep(5000);
+		driver.quit();
+ 
+	}
+}
+
+===============================
+4.
+
+package com;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class P4_clicklinkLogin 
+{
+
+	public static void main(String[] args) throws InterruptedException
+	{
+		WebDriver driver ;
+		driver = new ChromeDriver();
+		driver.get("http://demowebshop.tricentis.com");
+		WebElement login = driver.findElement(By.linkText("Log in"));
+		login.click();
+		Thread.sleep(5000);
+		driver.quit();
+
+	}
+
+}
+
+====================================
+
+5.
+
+package com;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class p5_textbox {
+
+	public static void main(String[] args) throws InterruptedException
+	{
+		WebDriver driver ;
+		driver = new ChromeDriver();
+		driver.get("http://demowebshop.tricentis.com");
+		WebElement login = driver.findElement(By.linkText("Log in"));
+		login.click();
+		Thread.sleep(5000);
+		WebElement username = driver.findElement(By.id("Email"));
+		username.sendKeys("abcdef");
+		Thread.sleep(5000);
+		driver.quit();
+	}
+}
+
+
+===================================
+6.
+
+package com;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class p6_checkbox {
+
+	public static void main(String[] args) throws InterruptedException
+	{
+		WebDriver driver ;
+		driver = new ChromeDriver();
+		driver.get("http://demowebshop.tricentis.com");
+		WebElement login = driver.findElement(By.linkText("Log in"));
+		login.click();
+		Thread.sleep(5000);
+//		WebElement username = driver.findElement(By.id("Email"));
+//		username.sendKeys("abcdef");
+//		//Thread.sleep(5000);
+		
+		WebElement rememberme = driver.findElement(By.id("RememberMe"));
+		boolean res = rememberme.isSelected();
+		System.out.println("Initial Value = "+ res);
+		rememberme.click();
+		Thread.sleep(5000);
+		res = rememberme.isSelected();
+		System.out.println("Remember me selection after clicking = "+ res);
+		
+		Thread.sleep(5000);
+		driver.quit();
+	}
+}
+
+
+==============================
+7.
+package com;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class p7_textbox {
+
+	public static void main(String[] args) throws InterruptedException
+	{
+		WebDriver driver ;
+		driver = new ChromeDriver();
+		driver.get("http://demowebshop.tricentis.com");
+		WebElement login = driver.findElement(By.linkText("Log in"));
+		login.click();
+		Thread.sleep(5000);
+		WebElement username = driver.findElement(By.id("Email"));
+		username.sendKeys("abcdef");
+		String s = username.getAttribute("value");
+		System.out.println(s.length());
+		Thread.sleep(5000);
+		driver.quit();
+	}
+
+}
+======================================
+8.
+
+package com;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class p8_radiobutton {
+
+	public static void main(String[] args) throws InterruptedException
+	{
+		WebDriver driver ;
+		driver = new ChromeDriver();
+		driver.get("http://demowebshop.tricentis.com");
+		WebElement register = driver.findElement(By.linkText("Register"));
+		register.click();
+		//Thread.sleep(5000);
+		WebElement male = driver.findElement(By.id("gender-male"));
+		male.click();
+		Thread.sleep(5000);
+		WebElement female = driver.findElement(By.id("gender-female"));
+		female.click();
+		
+		Thread.sleep(5000);
+		driver.quit();
+	}
+}
+
+================================
+
+9.
+
+
+package com;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
+public class p9_combobox {
+
+	public static void main(String[] args) throws InterruptedException
+	{
+		// TODO Auto-generated method stub
+		WebDriver driver;
+		driver = new ChromeDriver();
+		driver.get("https://sampleapp.tricentis.com/101/#");
+		driver.findElement(By.linkText("Automobile")).click();
+		Select make = new Select(driver.findElement(By.id("Make")));
+		int total = make.getOptions().size();
+//		System.out.println("Total values "+ total);
+//		Thread.sleep(3000);
+//		make.selectByVisibleText("Suzuki");
+		int i;
+		for (i=0;i<total;i++)
+		{
+			make.selectByIndex(i);
+			Thread.sleep(2000);
+		}
+		Thread.sleep(5000);
+		driver.quit();
+				
+
+	}
+
+}
+
+===============================
+10.
+
+package com;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
+public class p10_comboboxbyname {
+
+	public static void main(String[] args) throws InterruptedException
+	{
+		// TODO Auto-generated method stub
+		WebDriver driver;
+		driver = new ChromeDriver();
+		driver.get("https://sampleapp.tricentis.com/101/#");
+		driver.findElement(By.linkText("Automobile")).click();
+		Select make = new Select(driver.findElement(By.name("Make")));
+		int total = make.getOptions().size();
+//		System.out.println("Total values "+ total);
+//		Thread.sleep(3000);
+//		make.selectByVisibleText("Suzuki");
+		int i;
+		for (i=0;i<total;i++)
+		{
+			make.selectByIndex(i);
+			Thread.sleep(2000);
+		}
+		Thread.sleep(5000);
+		driver.quit();
+				
+
+	}
+
+}
+
+
+=================================
+11.
+
+package com;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class p11_partiallink {
+
+	public static void main(String[] args) throws InterruptedException 
+	{
+		// TODO Auto-generated method stub
+		WebDriver driver = new ChromeDriver();
+		driver.get("https://demowebshop.tricentis.com");
+		WebElement link = driver.findElement(By.partialLinkText("Log"));
+		link.click();
+		Thread.sleep(5000);
+		driver.quit();
+		
+
+	}
+
+}
+=========================
+12.
+package com;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class p12_totallinks {
+
+	public static void main(String[] args)
+	{
+		// TODO Auto-generated method stub
+		WebDriver driver = new ChromeDriver();
+		driver.get("https://demowebshop.tricentis.com");
+		List<WebElement> links = 
+				driver.findElements(By.tagName("a"));
+		int total = links.size();
+		System.out.println(total);
+		driver.quit();
+
+	}
+
+}
+
+===========================
+
+13.
+
+package com;
+
+//import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class p13_classname {
+
+	public static void main(String[] args) throws InterruptedException
+	{
+		
+		WebDriver driver = new ChromeDriver();
+		driver.get("https://demowebshop.tricentis.com");
+		WebElement login = driver.findElement(By.linkText("Log in"));
+		login.click();
+		WebElement username = driver.findElement(By.cssSelector("Input#Email"));
+		username.sendKeys("abcdef");
+		//element.click();
+		Thread.sleep(5000);
+//		List<WebElement> links = 
+//				driver.findElements(By.tagName("a"));
+//		int total = links.size();
+//		System.out.println(total);
+		driver.quit();
+
+	}
+
+}
+
+
+================================
+14.
+package com;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class p14_absolutepathxml {
+
+	public static void main(String[] args) throws InterruptedException 
+	{
+		WebDriver driver = new ChromeDriver();
+		driver.get("http://demowebshop.tricentis.com");
+		WebElement register = driver.findElement(By.xpath("/html/body/div[4]/div[1]/div[1]/div[2]/div[1]/ul/li[1]/a"));
+		register.click();
+		Thread.sleep(5000);
+		driver.quit();
+ 
+	}
+
+}
+=======================================
+15.
+package com;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class p15_relativepathxml {
+
+	public static void main(String[] args) throws InterruptedException 
+	{
+		WebDriver driver = new ChromeDriver();
+		driver.get("http://demowebshop.tricentis.com");
+		
+		//WebElement register = driver.findElement(By.xpath("//a[@href='/register']"));
+		WebElement register = driver.findElement(By.xpath("//*[contains(@href,'/register')]"));
+		register.click();
+		Thread.sleep(5000);
+		driver.quit();
+ 
+	}
+}
+
+===========================
+16.
+
+package com;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+
+public class P16_mousemovements {
+
+	public static void main(String[] args) throws InterruptedException 
+	{
+		// TODO Auto-generated method stub
+		WebDriver driver;
+		driver = new ChromeDriver();
+		driver.get("https://demowebshop.tricentis.com");
+		WebElement computers = driver.findElement(By.xpath("//a[@href='/computers']"));
+		Actions actions = new Actions(driver);
+		actions.moveToElement(computers).build().perform();
+		Thread.sleep(2000);
+		WebElement notebooks = 
+				driver.findElement(By.linkText("Notebooks"));
+		notebooks.click();
+		Thread.sleep(3000);
+		driver.quit();
+
+	}
+
+}
+
+===================================
+17.
+package com;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class P17_keyboard {
+
+	public static void main(String[] args) throws InterruptedException 
+	{
+		
+		WebDriver driver;
+		driver = new ChromeDriver();
+		driver.get("http://demowebshop.tricentis.com");
+		WebElement register = driver.findElement(By.linkText("Register"));
+		register.click();
+		WebElement fname = driver.findElement(By.id("FirstName"));
+		fname.sendKeys("abcdef");
+		fname.sendKeys(Keys.CONTROL, "a");
+		fname.sendKeys(Keys.CONTROL, "c");
+		Thread.sleep(2000);
+		WebElement lname = driver.findElement(By.id("LastName"));
+		lname.sendKeys(Keys.CONTROL, "v");
+		Thread.sleep(5000);
+		driver.quit(); 
+
+	}
+
+}
+===============================
+18.
+
+package com;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class P18_table {
+
+	public static void main(String[] args) throws InterruptedException {
+		// TODO Auto-generated method stub
+		WebDriver driver = new ChromeDriver();
+		driver.get("https://petstore.octoperf.com/");
+		driver.findElement(By.linkText("Enter the Store")).click();
+		driver.findElement(By.xpath("//*[@id=\"SidebarContent\"]/a[1]/img")).click();
+		WebElement table = driver.findElement(By.xpath("//*[@id=\"Catalog\"]/table/tbody"));
+		Thread.sleep(3000);
+		List<WebElement> rows = table.findElements(By.tagName("tr"));
+		System.out.println(rows.size());
+		WebElement table1 = driver.findElement(By.xpath("//*[@id=\"Catalog\"]/table/tbody/tr[1]"));
+		List<WebElement> cols = table1.findElements(By.tagName("th"));
+		System.out.println(cols.size());
+		driver.quit();
+		
+		
+
+	}
+
+}
+=======================================
+
+19.
+
+package com;
+
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class P19_popup {
+
+	public static void main(String[] args) throws InterruptedException 
+	{
+		// TODO Auto-generated method stub
+		WebDriver driver = new ChromeDriver();
+		driver.get("file:///C:/Users/venkata.sujay/Desktop/Testing/popup.html");
+		WebElement b= driver.findElement(By.id("one"));
+		b.click();
+		Thread.sleep(5000);
+		Alert alert = driver.switchTo().alert();
+		alert.accept();
+		Thread.sleep(5000);
+		driver.quit();
+
+	}
+
+}
+
+=====================================
+20.
+package com;
+
+import java.io.File;
+import java.io.IOException;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import com.google.common.io.Files;
+
+public class P20_Screenshots 
+{
+	static int i=1;
+	static WebDriver driver;
+	public static void main(String[] args) throws IOException, InterruptedException 
+	{
+		driver = new ChromeDriver();
+		driver.get("http://demowebshop.tricentis.com");
+		screenshot();
+		driver.findElement(By.linkText("Register")).click();
+		screenshot();
+		Thread.sleep(2000);
+		driver.findElement(By.id("FirstName")).sendKeys("firstname");
+		screenshot();
+		Thread.sleep(2000);
+		driver.findElement(By.id("LastName")).sendKeys("lastname");
+		screenshot();
+		Thread.sleep(2000);
+		driver.quit();
+	}
+
+	static void screenshot() throws IOException
+	{
+		
+		File scrFile;
+		scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+		Files.copy(scrFile, new File("C:\\Users\\venkata.sujay\\Desktop\\Testing\\Screenshots\\step"+i+".jpeg"));
+		i++;	
+	}
+
+}
+================================
+

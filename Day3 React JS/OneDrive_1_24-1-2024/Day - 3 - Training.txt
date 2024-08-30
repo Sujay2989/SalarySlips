@@ -1,0 +1,432 @@
+Example of ES6 class and constructor :
+
+// geometry.js
+
+// Define a class for Rectangle
+class Rectangle {
+  // Constructor to initialize the width and height
+  constructor(width, height) {
+    this.width = width;
+    this.height = height;
+  }
+
+  // Method to calculate the area of the rectangle
+  calculateArea() {
+    return this.width * this.height;
+  }
+
+  // Method to calculate the perimeter of the rectangle
+  calculatePerimeter() {
+    return 2 * (this.width + this.height);
+  }
+}
+
+// Export the Rectangle class to make it available in other files
+export { Rectangle };
+
+
+Now, let's create another file named app.js to use the Rectangle class:
+
+// app.js
+
+// Import the Rectangle class from the geometry module
+import { Rectangle } from './geometry';
+
+// Create a new instance of the Rectangle class
+const myRectangle = new Rectangle(5, 8);
+
+// Use the methods of the Rectangle class
+console.log('Area:', myRectangle.calculateArea());
+console.log('Perimeter:', myRectangle.calculatePerimeter());
+
+
+add "type": "module" in your package.json
+
+
+
+npm i react react-dom
+Step 3: Install Babel
+
+Let's install babel and the required presets and plugins.
+
+npm i -D @babel/preset-react @babel/preset-env @babel/core babel-loader @babel/plugin-proposal-class-properties
+
+Create a babel config file .babelrc
+
+
+{
+  "presets": [
+ [ "@babel/preset-env", {
+   "modules": false,
+   "targets": {
+  "browsers": [
+    "last 2 Chrome versions",
+    "last 2 Firefox versions",
+    "last 2 Safari versions",
+    "last 2 iOS versions",
+    "last 1 Android version",
+    "last 1 ChromeAndroid version",
+    "ie 11"
+  ]
+   }
+ } ],
+ "@babel/preset-react"
+  ],
+  "plugins": [ "@babel/plugin-proposal-class-properties" ]
+}
+Step 5: Install Webpack and Webpack Dev Server
+
+npm i -D webpack webpack-cli webpack-dev-server html-webpack-plugin path
+
+
+mkdir src public
+touch src/index.js src/App.js public/index.html
+
+webpack.config.js
+
+
+npm install style-loader css-loader file-loader
+
+const HtmlWebPackPlugin = require( 'html-webpack-plugin' );
+const path = require( 'path' );
+module.exports = {
+   context: __dirname,
+   entry: './src/index.js',
+   output: {
+      path: path.resolve( __dirname, 'dist' ),
+      filename: 'main.js',
+      publicPath: '/',
+   },
+   devServer: {
+      historyApiFallback: true
+   },
+   module: {
+      rules: [
+         {
+            test: /\.js$/,
+            use: 'babel-loader',
+         },
+         {
+            test: /\.css$/,
+            use: ['style-loader', 'css-loader'],
+         },
+         {
+            test: /\.(png|j?g|svg|gif)?$/,
+            use: 'file-loader'
+         }
+]
+   },
+   plugins: [
+      new HtmlWebPackPlugin({
+         template: path.resolve( __dirname, 'public/index.html' ),
+         filename: 'index.html'
+      })
+   ]
+};
+
+
+Step 7: Create a React Component src/App.js
+
+Create a class inside src/App.js and export it
+
+import React from 'react';
+class App extends React.Component {
+ render() {
+  return(
+   <div>
+    My App Component
+   </div>
+  );
+ }
+}
+export default App
+
+
+Step 8: Create a div#root inside public/index.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <title>React App</title>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/javascript" src="main.js"></script></body>
+</html>
+
+
+Step 9: Insert App.js component into the DOM
+
+Now let's insert the App.js component into div with the id root that exists public/index.html file
+
+// src/index.js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from "./App";
+
+ReactDOM.render( <App/>, document.getElementById('root') );
+
+Step 10: Add scripts in the package.json
+
+"scripts": {
+    "webpack-dev-server": "webpack-dev-server",
+    "dev": "webpack-dev-server --mode=development",
+    "prod": "webpack --mode=production"
+  },
+Now run the webpack dev server.
+
+npm run dev
+
+
+
+Example of Rendering Element in React:
+
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+// Define a simple component
+const MyComponent = () => {
+  return (
+    <div>
+      <h1>Hello, React!</h1>
+      <p>This is a simple React component.</p>
+    </div>
+  );
+};
+
+// Render the component to the DOM
+ReactDOM.render(<MyComponent />, document.getElementById('root'));
+
+
+Building First-Class Components:
+
+import React, { Component } from 'react';
+
+// Define a first-class component
+class FirstClassComponent extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      message: 'Hello from FirstClassComponent!',
+    };
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>{this.state.message}</h1>
+        <p>This is a first-class React component.</p>
+      </div>
+    );
+  }
+}
+
+export default FirstClassComponent;
+
+
+You can then use this component in another file:
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import FirstClassComponent from './FirstClassComponent';
+
+// Render the first-class component to the DOM
+ReactDOM.render(<FirstClassComponent />, document.getElementById('root'));
+
+
+Building Functional Components:
+
+import React from 'react';
+
+// Define a functional component
+const FunctionalComponent = () => {
+  return (
+    <div>
+      <h1>Hello from FunctionalComponent!</h1>
+      <p>This is a functional React component.</p>
+    </div>
+  );
+};
+
+export default FunctionalComponent;
+
+
+You can use this functional component similarly:
+
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import FunctionalComponent from './FunctionalComponent';
+
+// Render the functional component to the DOM
+ReactDOM.render(<FunctionalComponent />, document.getElementById('root'));
+
+
+Passing Data via Props in Functional Components:
+
+// ParentComponent.jsx
+import React from 'react';
+import ChildFunctionalComponent from './ChildFunctionalComponent';
+
+function ParentComponent() {
+  const dataToPass = "Hello from Parent!";
+  
+  return (
+    <div>
+      <ChildFunctionalComponent message={dataToPass} />
+    </div>
+  );
+}
+
+// ChildFunctionalComponent.jsx
+import React from 'react';
+
+function ChildFunctionalComponent(props) {
+  return (
+    <div>
+      <p>{props.message}</p>
+    </div>
+  );
+}
+
+export default ChildFunctionalComponent;
+
+
+Passing Data via Props in Class Components:
+
+
+// ParentComponent.jsx
+import React, { Component } from 'react';
+import ChildClassComponent from './ChildClassComponent';
+
+class ParentComponent extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      dataToPass: "Hello from Parent!"
+    };
+  }
+
+  render() {
+    return (
+      <div>
+        <ChildClassComponent message={this.state.dataToPass} />
+      </div>
+    );
+  }
+}
+
+// ChildClassComponent.jsx
+import React, { Component } from 'react';
+
+class ChildClassComponent extends Component {
+  render() {
+    return (
+      <div>
+        <p>{this.props.message}</p>
+      </div>
+    );
+  }
+}
+
+export default ChildClassComponent;
+
+
+Example of state in functional component:
+
+import React, { useState } from 'react';
+
+const Counter = () => {
+  // Define a state variable 'count' with an initial value of 0
+  const [count, setCount] = useState(0);
+
+  // Event handler to update the count state when the button is clicked
+  const incrementCount = () => {
+    setCount(count + 1);
+  };
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={incrementCount}>Increment</button>
+    </div>
+  );
+};
+
+export default Counter;
+
+
+Example of props in functional component:
+
+import React from 'react';
+
+// Child component that receives 'message' as a prop
+const DisplayMessage = (props) => {
+  return <p>{props.message}</p>;
+};
+
+// Parent component that renders the child component with a prop
+const MessageContainer = () => {
+  const messageText = "Hello, React Props!";
+
+  return (
+    <div>
+      <h2>Message Container</h2>
+      <DisplayMessage message={messageText} />
+    </div>
+  );
+};
+
+export default MessageContainer;
+
+
+Example of state and props in class component:
+
+
+import React, { Component } from 'react';
+
+class Counter extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0,
+    };
+  }
+
+  increment = () => {
+    this.setState({ count: this.state.count + 1 });
+  };
+
+  render() {
+    return (
+      <div>
+        <p>Count: {this.state.count}</p>
+        <button onClick={this.increment}>Increment</button>
+      </div>
+    );
+  }
+}
+
+export default Counter;
+
+
+
+import React, { Component } from 'react';
+
+// Child component
+class Greet extends Component {
+  render() {
+    return <p>Hello, {this.props.name}!</p>;
+  }
+}
+
+// Parent component
+class App extends Component {
+  render() {
+    return <Greet name="John" />;
+  }
+}
+
+export default App;

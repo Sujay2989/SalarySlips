@@ -1,0 +1,785 @@
+Example of Events Listen: 
+
+ParentComponent.js:
+
+import React, { useState } from 'react';
+import ChildComponent from './ChildComponent';
+
+const ParentComponent = () => {
+  const [messageFromChild, setMessageFromChild] = useState('');
+
+  const handleChildEvent = (message) => {
+    setMessageFromChild(message);
+  };
+
+  return (
+    <div>
+      <h1>Parent Component</h1>
+      <p>Message from Child: {messageFromChild}</p>
+      <ChildComponent onChildEvent={handleChildEvent} />
+    </div>
+  );
+};
+
+export default ParentComponent;
+
+
+
+ChildComponent.js:
+
+
+import React, { useState } from 'react';
+
+const ChildComponent = ({ onChildEvent }) => {
+  const [message, setMessage] = useState('');
+
+  const handleChange = (e) => {
+    setMessage(e.target.value);
+  };
+
+  const handleClick = () => {
+    // Send the message to the parent component
+    onChildEvent(message);
+  };
+
+  return (
+    <div>
+      <h2>Child Component</h2>
+      <input type="text" value={message} onChange={handleChange} />
+      <button onClick={handleClick}>Send Message to Parent</button>
+    </div>
+  );
+};
+
+export default ChildComponent;
+
+
+Replace the content of src/App.js with:
+
+import React from 'react';
+import ParentComponent from './ParentComponent';
+
+function App() {
+  return (
+    <div className="App">
+      <ParentComponent />
+    </div>
+  );
+}
+
+export default App;
+
+
+
+
+Example of Conditional Rendering:
+
+
+// Import React and useState hook
+import React, { useState } from 'react';
+
+// Functional component
+function ConditionalRenderingExample() {
+  // State variable to track whether the user is logged in
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // Function to handle login/logout
+  const handleLoginToggle = () => {
+    // Toggle the value of isLoggedIn
+    setIsLoggedIn(!isLoggedIn);
+  };
+
+  // Render different content based on the login status
+  return (
+    <div>
+      <h1>Conditional Rendering Example</h1>
+      {/* Display different messages based on the login status */}
+      {isLoggedIn ? (
+        <p>Welcome, User! You are logged in.</p>
+      ) : (
+        <p>Please log in to access the content.</p>
+      )}
+
+      {/* Render a button to toggle login status */}
+      <button onClick={handleLoginToggle}>
+        {isLoggedIn ? 'Logout' : 'Login'}
+      </button>
+    </div>
+  );
+}
+
+// Export the component
+export default ConditionalRenderingExample;
+
+
+
+Example of Lifecycle method using class components:
+
+
+import React, { Component } from 'react';
+
+class LifecycleExample extends Component {
+  // 1. Mounting Phase
+  constructor(props) {
+    super(props);
+    console.log('1. Constructor - Component is being initialized');
+    this.state = {
+      data: 'Initial data',
+    };
+  }
+
+  static getDerivedStateFromProps(nextProps, nextState) {
+    console.log('2. getDerivedStateFromProps - Called before every render if props/state change');
+    return null;
+  }
+
+  componentDidMount() {
+    console.log('3. componentDidMount - Component is mounted to the DOM');
+  }
+
+  // 2. Updating Phase
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('4. shouldComponentUpdate - Determines whether the component should re-render');
+    return true;
+  }
+
+  getSnapshotBeforeUpdate(prevProps, prevState) {
+    console.log('5. getSnapshotBeforeUpdate - Called before changes from render are committed to the DOM');
+    return null;
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log('6. componentDidUpdate - Called after the component is updated in the DOM');
+  }
+
+  // 3. Unmounting Phase
+  componentWillUnmount() {
+    console.log('7. componentWillUnmount - Called before the component is removed');
+  }
+
+  // Other lifecycle methods:
+  // componentDidCatch(error, info) - Error boundary
+  // static getDerivedStateFromError(error) - Error boundary
+
+  // Handling events
+  handleClick = () => {
+    this.setState({ data: 'Updated data' });
+  };
+
+  render() {
+    console.log('Render - Component is rendered');
+    return (
+      <div>
+        <p>Data: {this.state.data}</p>
+        <button onClick={this.handleClick}>Update Data</button>
+      </div>
+    );
+  }
+}
+
+export default LifecycleExample;
+
+
+Example of lifecycle method in functional component:
+
+import React, { useState, useEffect } from 'react';
+
+const MyComponent = () => {
+  // State using the useState hook
+  const [data, setData] = useState([]);
+
+  // useEffect hook to mimic componentDidMount and componentDidUpdate
+  useEffect(() => {
+    // Code here will run after the component renders
+
+    // For example, fetch some data from an API
+    const fetchData = async () => {
+      try {
+        const response = await fetch('https://api.example.com/data');
+        const result = await response.json();
+        setData(result);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+
+    // Code here will run when the component is about to unmount
+    return () => {
+      console.log('Component will unmount');
+    };
+  }, []); // Empty dependency array means it runs once after the initial render
+
+  // Render your component
+  return (
+    <div>
+      <h1>MyComponent</h1>
+      <ul>
+        {data.map((item, index) => (
+          <li key={index}>{item.name}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default MyComponent;
+
+
+Rendering the List Example :
+
+
+// src/App.js
+import React from 'react';
+
+const ListExample = () => {
+  // Sample list of items
+  const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4'];
+
+  return (
+    <div>
+      <h1>List Example</h1>
+      <ul>
+        {/* Render the list items using map */}
+        {items.map((item, index) => (
+          <li key={index}>{item}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default ListExample;
+
+
+
+Example of Understand keys in list and add styles :
+
+
+
+import React from 'react';
+
+const MyListComponent = () => {
+  const data = [
+    { id: 1, text: 'Item 1' },
+    { id: 2, text: 'Item 2' },
+    { id: 3, text: 'Item 3' },
+  ];
+
+  return (
+    <ul>
+      {data.map(item => (
+        <ListItem key={item.id} text={item.text} />
+      ))}
+    </ul>
+  );
+};
+
+const ListItem = ({ text }) => {
+  // You can add your styles here
+  const listItemStyle = {
+    padding: '10px',
+    border: '1px solid #ddd',
+    margin: '5px',
+    borderRadius: '5px',
+    backgroundColor: '#f0f0f0',
+  };
+
+  return <li style={listItemStyle}>{text}</li>;
+};
+
+export default MyListComponent;
+
+
+Example of Form handling in react and change state of input fields:
+
+
+import React, { useState } from 'react';
+
+function MyForm() {
+  // State to manage the value of the input field
+  const [inputValue, setInputValue] = useState('');
+
+  // Event handler to update the state when the input value changes
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  // Event handler to handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert(`Submitted value: ${inputValue}`);
+    // You can perform additional actions with the form data here
+  };
+
+  return (
+    <div>
+      <h1>Form Handling in React</h1>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Enter value:
+          <input
+            type="text"
+            value={inputValue}
+            onChange={handleInputChange}
+          />
+        </label>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  );
+}
+
+export default MyForm;
+
+
+Example of 2-way binding :
+
+
+// ParentComponent.jsx
+import React, { useState } from 'react';
+import ChildComponent from './ChildComponent';
+
+const ParentComponent = () => {
+  // Define a state variable
+  const [inputValue, setInputValue] = useState('');
+
+  // Define a function to update the state
+  const handleInputChange = (newValue) => {
+    setInputValue(newValue);
+  };
+
+  return (
+    <div>
+      {/* Render ChildComponent and pass state and update function as props */}
+      <ChildComponent value={inputValue} onChange={handleInputChange} />
+
+      {/* Display the current state value */}
+      <p>Parent Component State: {inputValue}</p>
+    </div>
+  );
+};
+
+export default ParentComponent;
+
+
+// ChildComponent.jsx
+import React from 'react';
+
+const ChildComponent = ({ value, onChange }) => {
+  // Handle input changes and call the parent's update function
+  const handleChange = (e) => {
+    onChange(e.target.value);
+  };
+
+  return (
+    <div>
+      {/* Receive value and call handleChange on input change */}
+      <input type="text" value={value} onChange={handleChange} />
+
+      {/* Display the received value */}
+      <p>Child Component Value: {value}</p>
+    </div>
+  );
+};
+
+export default ChildComponent;
+
+
+Example of Controlled Component:
+
+import React, { useState } from 'react';
+
+const ControlledComponent = () => {
+  const [inputValue, setInputValue] = useState('');
+
+  const handleChange = (event) => {
+    setInputValue(event.target.value);
+  };
+
+  return (
+    <div>
+      <label>
+        Controlled Input:
+        <input type="text" value={inputValue} onChange={handleChange} />
+      </label>
+      <p>Input value: {inputValue}</p>
+    </div>
+  );
+};
+
+export default ControlledComponent;
+
+
+
+Example of Uncontrolled Components:
+
+import React, { useRef } from 'react';
+
+const UncontrolledComponent = () => {
+  const inputRef = useRef(); // it is use to use the refernce of the value
+
+  const handleClick = () => {
+    alert(`Input value: ${inputRef.current.value}`);
+  };
+
+  return (
+    <div>
+      <label>
+        Uncontrolled Input:
+        <input type="text" ref={inputRef} />
+      </label>
+      <button onClick={handleClick}>Get Input Value</button>
+    </div>
+  );
+};
+
+export default UncontrolledComponent;
+
+In this example, the inputRef is used to access the current value of the input field. React doesn't manage the input value through state, and instead, you directly interact with the DOM using refs.
+
+
+Example of Other form element (radio, checkbox, dropdown):
+
+
+import React, { useState } from 'react';
+
+const MyForm = () => {
+  // State variables to manage the selected values
+  const [selectedOption, setSelectedOption] = useState('');
+  const [isChecked, setIsChecked] = useState(false);
+  const [selectedValue, setSelectedValue] = useState('');
+
+  // Handler functions to update state on user input
+  const handleRadioChange = (event) => {
+    setSelectedOption(event.target.value);
+  };
+
+  const handleCheckboxChange = () => {
+    setIsChecked(!isChecked);
+  };
+
+  const handleDropdownChange = (event) => {
+    setSelectedValue(event.target.value);
+  };
+
+  return (
+    <div>
+      {/* Radio Buttons */}
+      <div>
+        <label>
+          <input
+            type="radio"
+            value="option1"
+            checked={selectedOption === 'option1'}
+            onChange={handleRadioChange}
+          />
+          Option 1
+        </label>
+        <label>
+          <input
+            type="radio"
+            value="option2"
+            checked={selectedOption === 'option2'}
+            onChange={handleRadioChange}
+          />
+          Option 2
+        </label>
+      </div>
+
+      {/* Checkbox */}
+      <div>
+        <label>
+          <input
+            type="checkbox"
+            checked={isChecked}
+            onChange={handleCheckboxChange}
+          />
+          Check me
+        </label>
+      </div>
+
+      {/* Dropdown */}
+      <div>
+        <label>
+          Select an option:
+          <select value={selectedValue} onChange={handleDropdownChange}>
+            <option value="optionA">Option A</option>
+            <option value="optionB">Option B</option>
+            <option value="optionC">Option C</option>
+          </select>
+        </label>
+      </div>
+
+      {/* Display selected values */}
+      <div>
+        <p>Selected Radio Option: {selectedOption}</p>
+        <p>Checkbox is {isChecked ? 'checked' : 'unchecked'}</p>
+        <p>Selected Dropdown Option: {selectedValue}</p>
+      </div>
+    </div>
+  );
+};
+
+export default MyForm;
+
+
+
+
+Example of Form validation :
+
+
+
+import React, { useState } from 'react';
+
+const MyForm = () => {
+  // State variables for form data and validation
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    password: '',
+  });
+
+  const [formErrors, setFormErrors] = useState({
+    username: '',
+    email: '',
+    password: '',
+  });
+
+  // Function to handle form input changes
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  // Function to handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Validate form fields
+    let errors = {};
+    if (!formData.username.trim()) {
+      errors.username = 'Username is required';
+    }
+
+    if (!formData.email.trim()) {
+      errors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      errors.email = 'Invalid email format';
+    }
+
+    if (!formData.password.trim()) {
+      errors.password = 'Password is required';
+    } else if (formData.password.length < 6) {
+      errors.password = 'Password must be at least 6 characters long';
+    }
+
+    // Update form errors state
+    setFormErrors(errors);
+
+    // If there are no errors, proceed with form submission logic
+    if (Object.keys(errors).length === 0) {
+      // Perform your form submission logic here
+      console.log('Form submitted:', formData);
+    }
+  };
+
+  return (
+    <div>
+      <h2>My Form</h2>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>Username:</label>
+          <input
+            type="text"
+            name="username"
+            value={formData.username}
+            onChange={handleInputChange}
+          />
+          {formErrors.username && <span>{formErrors.username}</span>}
+        </div>
+
+        <div>
+          <label>Email:</label>
+          <input
+            type="text"
+            name="email"
+            value={formData.email}
+            onChange={handleInputChange}
+          />
+          {formErrors.email && <span>{formErrors.email}</span>}
+        </div>
+
+        <div>
+          <label>Password:</label>
+          <input
+            type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleInputChange}
+          />
+          {formErrors.password && <span>{formErrors.password}</span>}
+        </div>
+
+        <div>
+          <button type="submit">Submit</button>
+        </div>
+      </form>
+    </div>
+  );
+};
+
+export default MyForm;
+
+
+
+
+Example of Handle form submission:
+
+
+import React, { useState } from 'react';
+
+const App = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Form submitted with data:', formData);
+    // You can perform additional actions here, such as sending the data to a server.
+  };
+
+  return (
+    <div>
+      <h1>React Form Example</h1>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Name:
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+          />
+        </label>
+        <br />
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  );
+};
+
+export default App;
+
+
+
+
+Example of Higher order components:
+
+
+import React, { useState } from 'react';
+
+// Higher Order Component
+const withCounter = (WrappedComponent) => {
+  // Define a new functional component
+  const WithCounter = (props) => {
+    const [count, setCount] = useState(0);
+
+    // Define additional functionality
+    const incrementCount = () => {
+      setCount(count + 1);
+    };
+
+    // Return the wrapped component with additional props
+    return <WrappedComponent count={count} incrementCount={incrementCount} {...props} />;
+  };
+
+  return WithCounter;
+};
+
+// Create a simple component
+const ClickCounter = ({ count, incrementCount }) => {
+  return (
+    <div>
+      <button onClick={incrementCount}>Click me</button>
+      <p>Clicked {count} times</p>
+    </div>
+  );
+};
+
+// Use the HOC to enhance the ClickCounter component
+const EnhancedClickCounter = withCounter(ClickCounter);
+
+// App component
+const App = () => {
+  return (
+    <div>
+      <h1>Higher Order Component Example</h1>
+      <EnhancedClickCounter />
+    </div>
+  );
+};
+
+export default App;
+
+
+Example of Memorization :
+
+
+// Counter.js
+
+import React from 'react';
+
+const Counter = React.memo(({ count, increment }) => {
+  console.log('Rendering Counter Component');
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={increment}>Increment</button>
+    </div>
+  );
+});
+
+export default Counter;
+
+
+In this example, the Counter component takes two props: count and increment. When the "Increment" button is clicked, the increment function will be called to update the count.
+
+
+// App.js
+
+import React, { useState, useCallback } from 'react';
+import Counter from './Counter';
+
+const App = () => {
+  const [count, setCount] = useState(0);
+
+  const increment = useCallback(() => {
+    setCount((prevCount) => prevCount + 1);
+  }, []);
+
+  return (
+    <div>
+      <h1>React Memoization Example</h1>
+      <Counter count={count} increment={increment} />
+    </div>
+  );
+};
+
+export default App;
+
+
+In this App component, we use the useState hook to manage the count state. The increment function is defined using useCallback to ensure that it doesn't change between renders unless count changes.
