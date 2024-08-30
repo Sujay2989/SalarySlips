@@ -1,0 +1,142 @@
+Software testing:
+It is a process that involves evaluating and examining computer software
+or applications to ensure they function correctly and meet the desired 
+requirements. It involves identifying any errors, gaps, or missing 
+requirements that may negatively affect the software’s performance,
+usability, functionality, or security.
+
+Software testing can be divided into two steps:
+# Verification: It refers to the set of tasks that ensure that the 
+software correctly implements a specific function. It means 
+“Are we building the product right?”.
+
+# Validation: It refers to a different set of tasks that ensure that 
+the software that has been built is traceable to customer requirements.
+It means “Are we building the right product?”.
+
+
+Types of Software Testing:
+
+1)Manual Testing:
+		Manual testing is the process of verifying an application’s 
+functionality in accordance with client requirements without using any 
+automated techniques.we should have a thorough grasp of the product in 
+order to quickly create the test document.
+Manual testing is further divided into three types of testing :
+
+	* White box testing:
+		Black box technique of testing in which the tester 
+		doesn’t have access to the source code of the software 
+		and is conducted at the software interface without any 
+		concern with the internal logical structure of the 
+		software known as black-box testing.
+	* Black box testing:
+		White box technique of testing in which the tester is 
+		aware of the internal workings of the product, has 
+		access to its source code, and is conducted by making 
+		sure that all internal operations are performed 
+		according to the specifications is known as white box 
+		testing. 
+	* Grey box testing:
+		Grey Box technique is testing in which the testers 
+		should have knowledge of implementation, however, they 
+		need not be experts
+
+2)Automation Testing
+With the use of automation tools or a programming language referred 
+to as automation testing, any manual test cases may be converted into 
+test scripts. We can increase the pace of our test execution with the 
+aid of automated testing as there is no need for human labour. It is 
+necessary to create and run test scripts.
+
+
+Software Testing Principles:
+1)Testing Shows the Presence of Defects:
+The primary purpose of testing is to identify defects or bugs in the 
+software. Successful testing is not about proving the correctness of 
+the software but revealing the presence of defects.
+
+2)Exhaustive Testing is Impossible:
+It is practically impossible to test every possible input and 
+scenario for a software application. Therefore, testing efforts 
+should be focused on high-risk areas and where defects are likely to 
+occur.
+
+3)Early Testing:
+Testing activities should start early in the software development 
+life cycle. Detecting and fixing defects early in the process helps 
+in reducing the cost and effort required for rectification.
+
+4)Defect Clustering:
+In many cases, a small number of modules or functionalities tend to 
+contain a large number of defects. This principle suggests that a 
+significant portion of defects is usually concentrated in a small part
+of the software.
+
+5)Pesticide Paradox:
+If the same set of tests is repeated over time, it might not be as 
+effective in discovering new defects. Test cases need to evolve and 
+be regularly reviewed and updated to find different types of defects.
+
+6)Testing is Context-Dependent:
+The effectiveness of testing depends on the context of the project,
+including the requirements, technology, and the project's goals.
+Different projects may require different testing approaches.
+
+7)Absence-of-Errors Fallacy:
+Finding and fixing all defects does not guarantee a defect-free 
+product. The absence of known defects does not imply the absence of 
+all defects.
+
+8)Testing is a Risk-Mitigation Activity:
+Testing aims to identify and reduce the risks associated with software
+development. The focus should be on managing and mitigating the most 
+critical risks.
+
+9)Test Automation is a Tool, Not the Goal:
+While test automation can enhance efficiency, it should be used 
+judiciously. The goal is not just to automate tests but to improve the
+overall testing process.
+
+10)Testing Cannot Prove Software Correctness:
+Testing can demonstrate the presence of defects, but it cannot prove 
+that a software product is entirely error-free.
+
+11)Testing is a Creative and Intellectual Process:
+Effective testing requires creativity, intuition, and intellectual 
+rigor. Testers need to think critically and consider various scenarios
+to identify potential defects.
+
+12)Testing should be Independent:
+Testing activities should be conducted by individuals or teams separate
+from the development team to avoid bias and ensure objectivity.
+
+
+The main four types of testing are:
+1)Unit/Component Testing:
+	Unit testing is a level of the software testing process where 
+	individual units/components of a software/system are tested.
+	The purpose is to validate that each unit of the software 
+	performs as designed. 
+2)Integration Testing:
+	Integration testing is a level of the software testing process
+	where individual units are combined and tested as a group.
+	The purpose of this level of testing is to expose faults in the
+	interaction between integrated units.
+3)System Testing:
+	System testing is a level of the software testing process where
+	a complete, integrated system/software is tested. The purpose 
+	of this test is to evaluate the system’s compliance with the 
+	specified requirements.
+4)Acceptance Testing:
+	Acceptance testing is a level of the software testing process 
+	where a system is tested for acceptability. The purpose of this
+	test is to evaluate the system’s compliance with the business 
+	requirements and assess whether it is acceptable for delivery.
+
+The following are the attributes of good software test :
+1. It has a high probability of finding errors.
+2. It should be Non-redundant.
+3. It should be capable of uncovering a whole class of errors.
+4. It should not be too simple or too complex.
+
